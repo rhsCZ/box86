@@ -284,7 +284,11 @@ uintptr_t Run66(x86emu_t *emu, int rep, uintptr_t addr)
             GET_EW;
             EW->word[0] = emu->segs[(nextop&0x38)>>3];
             break;
-        
+        case 0x8D:                      	/* LEA Gw,M */
+            nextop = F8;
+            GET_ED_;
+            GW.word[0] = (uint16_t)(uint32_t)ED;
+            break;
         case 0x8E:                               /* MOV Seg,Ew */
             nextop = F8;
             GET_EW;
