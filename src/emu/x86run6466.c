@@ -48,6 +48,12 @@ uintptr_t Run6466(x86emu_t *emu, uintptr_t tlsdata, uintptr_t addr)
             GW.word[0] = EW->word[0];
             break;
 
+        case 0x8D:                      	    /* LEA Gw,M */
+            nextop = F8;
+            GET_ED_;    // segment doesn't enter in the computation
+            GW.word[0] = (uint16_t)(uint32_t)ED;
+            break;
+
         default:
             return 0;
     }
